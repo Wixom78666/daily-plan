@@ -6,7 +6,34 @@ $(document).ready(function () {
 
     var date = dayjs();
     $('#currentDay').text(date);
+    
+    function timeTracker() {
+        
+        var timeNow = dayjs().hour();
 
+        $(".time-block").each(function () {
+            var blockTime = parseInt($(this).attr("id").split()[1]);
+
+            if (blockTime < timeNow) {
+                $(this).removeClass("future");
+                $(this).removeClass("present");
+                $(this).addClass("past");
+            }
+            else if (blockTime === timeNow) {
+                $(this).removeClass("past");
+                $(this).removeClass("future");
+                $(this).addClass("present");
+            }
+            else {
+                $(this).removeClass("present");
+                $(this).removeClass("past");
+                $(this).addClass("future");
+
+            }
+        })
+    }
+    timeTracker();
+})
 
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
@@ -25,5 +52,4 @@ $(document).ready(function () {
     // the values of the corresponding textarea elements. HINT: How can the id
     // attribute of each time-block be used to do this?
     //
-    // TODO: Add code to display the current date in the header of the page.
-  });
+  // TODO: Add code to display the current date in the header of the page }
